@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第五組｜正式專案計畫：關稅政策消息監控系統</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+    line-height: 1.68;
+    color: #24292f;
+    background-color: #f6f8fa;
+    padding: 32px 16px;
+    margin: 0;
+  }
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    border: 1px solid #e1e4e8;
+  }
+  h1 { font-size: 26px; border-bottom: 2px solid #eaecef; padding-bottom: 12px; color: #1a1f2c; }
+  h2 { font-size: 20px; border-bottom: 1px solid #eaecef; padding-bottom: 8px; margin-top: 32px; color: #2d3748; }
+  h3 { font-size: 16px; margin-top: 24px; color: #4a5568; }
+  blockquote {
+    margin: 16px 0;
+    padding: 12px 20px;
+    background-color: #f0f7ff;
+    border-left: 4px solid #0969da;
+    color: #1f2328;
+    border-radius: 0 8px 8px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+  th, td {
+    padding: 10px 14px;
+    border: 1px solid #d0d7de;
+    text-align: left;
+  }
+  th {
+    background-color: #f6f8fa;
+    font-weight: 600;
+  }
+  tr:nth-child(even) {
+    background-color: #fcfcfd;
+  }
+  code {
+    background-color: rgba(175, 184, 193, 0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 13px;
+  }
+  pre {
+    background: #f6f8fa;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13px;
+    border: 1px solid #e1e4e8;
+  }
+  ul, ol { padding-left: 24px; }
+  li { margin-bottom: 6px; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .badge-high { background: #ffebe9; color: #cf222e; }
+  .badge-med { background: #fff8c5; color: #9a6700; }
+  .badge-pending { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de; }
+  .footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid #eaecef;
+    font-size: 12px;
+    color: #57606a;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>第五組｜正式專案計畫</h1>
+  <h2>關稅政策消息監控系統（新聞來源）</h2>
+  <blockquote>
+    <strong>核心目標</strong>：每天分類新動態，標出影響哪些全球金融標的，回答「今日關稅政策變化，以及明天需要注意哪些標的」。
+  </blockquote>
+
+  <h2>1. 專案主旨</h2>
+  <p>建立一套<strong>全球關稅政策消息監控系統</strong>。</p>
+  <h3>核心運作邏輯</h3>
+  <ol>
+    <li><strong>持續讀取</strong>：全球各國官方政策資訊 ＋ 全球主要新聞媒體。</li>
+    <li><strong>自動搜尋與擷取</strong>：過濾並擷取與關稅／貿易政策高度相關的新消息。</li>
+    <li><strong>資訊結構化轉換</strong>：政策事件 → 國家 → 產品 → 產業 → 標的 → 影響方向 → 重要程度</li>
+    <li><strong>每日決策產出</strong>：<strong>「今日關稅政策變化，以及明天需要注意哪些標的」</strong></li>
+  </ol>
+  <p>本專案完全符合課程指定「抓 → 理 → 看 → 監控化 → 結論報告」之要求。</p>
+
+  <h2>2. 三項正式決策</h2>
+  <h3>① 標的不限定台股（擴展至全球金融市場標的）</h3>
+  <ul>
+    <li><strong>監控範圍</strong>：全球金融市場標的，包含台股、美股、港股、日股、韓股、中國股票、ETF、產業指數、大宗商品（Commodities）等。</li>
+    <li><strong>細節說明</strong>：保留對非股票標的（如外匯、期貨）之擴充彈性。</li>
+  </ul>
+
+  <h3>② 標的映射採「AI ＋ 人工資料庫」混合架構</h3>
+  <ul>
+    <li><strong>人工資料庫（Ground Truth）</strong>：負責已知、可驗證的產業鏈與公司關聯（如汽車 → Tesla, Toyota, 台灣零組件廠；半導體 → TSMC, Intel, 設備商）。</li>
+    <li><strong>AI 推薦（Discovery）</strong>：從最新政策脈絡中發掘新興供應鏈，並標註為 <code>AI推薦／待確認</code>，降低幻覺風險。</li>
+  </ul>
+
+  <h3>③ 全球新聞全部納入</h3>
+  <ul>
+    <li>全球任兩國或多邊組織（美中、美歐、美台、中歐、日韓、印美、墨美等）關稅/貿易政策皆全量納入。</li>
+  </ul>
+
+  <h2>3. 資料結構規範（Data Schema）</h2>
+  <table>
+    <thead>
+      <tr><th>欄位名稱</th><th>英文欄位名</th><th>類型</th><th>說明</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>新聞編號</strong></td><td><code>news_id</code></td><td>String</td><td>唯一識別碼</td></tr>
+      <tr><td><strong>事件編號</strong></td><td><code>event_id</code></td><td>String</td><td>聚合同一政策事件之 ID</td></tr>
+      <tr><td><strong>標題</strong></td><td><code>title</code></td><td>String</td><td>新聞或公告原始標題</td></tr>
+      <tr><td><strong>來源</strong></td><td><code>source</code></td><td>String</td><td>媒體名稱或官方機構名稱</td></tr>
+      <tr><td><strong>發布時間</strong></td><td><code>published_at</code></td><td>DateTime</td><td>報導或發布時間</td></tr>
+      <tr><td><strong>涉及國家</strong></td><td><code>countries</code></td><td>Array</td><td>發起國、受影響國（如 US, CN, TW）</td></tr>
+      <tr><td><strong>政策措施</strong></td><td><code>policy_action</code></td><td>String</td><td>加徵關稅、配額、豁免、反傾銷等</td></tr>
+      <tr><td><strong>稅率資訊</strong></td><td><code>tariff_rate</code></td><td>String</td><td>調整前原稅率／調整後新稅率</td></tr>
+      <tr><td><strong>生效日期</strong></td><td><code>effective_date</code></td><td>Date/String</td><td>政策預計生效日或實施期程</td></tr>
+      <tr><td><strong>產品項目</strong></td><td><code>products</code></td><td>Array</td><td>具體產品名稱（如電動車、晶片）</td></tr>
+      <tr><td><strong>HS Code</strong></td><td><code>hs_code</code></td><td>String/Array</td><td>海關稅則編號</td></tr>
+      <tr><td><strong>所屬產業</strong></td><td><code>industries</code></td><td>Array</td><td>對應產業別（半導體、汽車、鋼鐵等）</td></tr>
+      <tr><td><strong>政策狀態</strong></td><td><code>policy_status</code></td><td>Enum</td><td>研擬中 → 正式提案 → 正式簽署 → 已生效</td></tr>
+      <tr><td><strong>相關標的</strong></td><td><code>securities</code></td><td>Array</td><td>受影響之股票代號、ETF、大宗商品</td></tr>
+      <tr><td><strong>影響方向</strong></td><td><code>impact_direction</code></td><td>Enum</td><td>Positive / Negative / Neutral</td></tr>
+      <tr><td><strong>影響程度</strong></td><td><code>impact_score</code></td><td>Integer</td><td>強度評分（1 至 5 分）</td></tr>
+      <tr><td><strong>AI 信心度</strong></td><td><code>confidence</code></td><td>String</td><td>High / Medium / Low</td></tr>
+      <tr><td><strong>原文網址</strong></td><td><code>url</code></td><td>String</td><td>新聞或官方來源連結</td></tr>
+      <tr><td><strong>原始內容</strong></td><td><code>raw_content</code></td><td>Text</td><td>原始全文（完整保存）</td></tr>
+    </tbody>
+  </table>
+
+  <h2>4. 標的映射與信心分級</h2>
+  <table>
+    <thead>
+      <tr><th>標的名稱</th><th>關聯來源</th><th>信心等級</th><th>處理策略</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>標的 A</strong></td><td>人工資料庫直接命中</td><td><span class="badge badge-high">高 (High)</span></td><td>直接列入正式監控清單</td></tr>
+      <tr><td><strong>標的 B</strong></td><td>人工資料庫 ＋ AI 交叉驗證</td><td><span class="badge badge-med">中 (Medium)</span></td><td>列入重點觀察清單</td></tr>
+      <tr><td><strong>標的 C</strong></td><td>AI 新發現 / 擴展推論</td><td><span class="badge badge-pending">待確認 (Pending)</span></td><td>標註「AI推薦/待確認」供覆核</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5. 影響分類標籤</h2>
+  <ul>
+    <li>🔴 <strong>直接利空</strong>：主營產品直接受課稅影響。</li>
+    <li>🟠 <strong>間接利空</strong>：供應鏈、重要客戶受衝擊或成本攀升。</li>
+    <li>🟢 <strong>潛在受惠</strong>：競爭對手受限，產生轉單效應。</li>
+    <li>⚪ <strong>待確認</strong>：資訊不足或政策尚未明朗。</li>
+  </ul>
+
+  <h2>6. 專案驗收里程碑（五大階段）</h2>
+  <table>
+    <thead>
+      <tr><th>關卡</th><th>驗收指標</th><th>交付成果</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>① 抓</strong></td><td>成功自動擷取全球官方機構與主流媒體之關稅新聞</td><td>原始資料庫與爬蟲管線</td></tr>
+      <tr><td><strong>② 理</strong></td><td>日期、來源、國家、產品、Event ID 與標的成功結構化</td><td>清洗後之 JSON/CSV 資料庫</td></tr>
+      <tr><td><strong>③ 看</strong></td><td>產出關稅政策頻率、產業熱點與標的分佈圖表（含兩個以上事件日）</td><td>視覺化圖表與趨勢圖</td></tr>
+      <tr><td><strong>④ 監控化</strong></td><td>具備定時更新／一鍵重跑機制，自動拉取最新資料</td><td>自動化工作流腳本</td></tr>
+      <tr><td><strong>⑤ 結論</strong></td><td>每日自動產出具備實質決策價值的「每日監控報告」</td><td>Markdown / PDF 日報模組</td></tr>
+    </tbody>
+  </table>
+
+  <h2>7. 最終展示指令</h2>
+  <pre><code>python main.py</code></pre>
+  <p>展示流程：抓取新聞 → AI 分類 → 找出受影響產業 → 映射全球標的 → 產生圖表 → 產出每日報告（回答明天要注意什麼）。</p>
+
+  <div class="footer">
+    第五組專案計畫書 ｜ 生成時間：2026-08-18 ｜ 檔案位置：C:\Users\USER\Documents\第五組\PLAN.md
+  </div>
+</div>
+</body>
+</html>
